@@ -39,24 +39,10 @@ export class HomeComponent {
                 housingLocation?.state.toLowerCase().includes(text.toLowerCase())
         );
     }
-    // filterStateResults(text: string) {
-    //     if (!text) {
-    //         this.filteredLocationListState = this.housingLocationList;
-    //     }
-    //     this.filteredLocationListState = this.housingLocationList.filter(
-    //         housingLocation => housingLocation?.name.toLowerCase().includes(text.toLowerCase())
-    //     );
-    // }
-    // filterNameResults(text: string) {
-    //     if (!text) {
-    //         this.filteredLocationListName = this.housingLocationList;
-    //     }
-    //     this.filteredLocationListName = this.housingLocationList.filter(
-    //         housingLocation => housingLocation?.name.toLowerCase().includes(text.toLowerCase())
-    //     );
-    // }
     constructor() {
-        this.housingLocationList = this.housingService.getAllHousingLocations();
-        this.filteredLocationList = this.housingLocationList;
+        this.housingService.getAllHousingLocations().then((housingLocationList: HousingLocation[]) => {
+            this.housingLocationList = housingLocationList;
+            this.filteredLocationList = housingLocationList;
+        });
     }
 }
